@@ -1,0 +1,27 @@
+.editor-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  line-height: 1.5;
+  font-size: 1.2rem;
+}
+
+.editor-container {
+  flex: 1;
+  overflow: hidden;
+
+  .editor-textarea {
+    width: 100%;
+    min-height: calc(100vh - var(--header-height));
+    padding: 10px;
+    background-color: var(--color-background-dark);
+    outline: none;
+    resize: vertical;
+    font-family: "Gordita", monospace;
+    border: none;
+    box-sizing: border-box;
+    box-shadow: inset 2px 2px 5px 0 var(--color-background-darkest),
+      inset -2px -2px 5px 0 var(--color-background-lightest),
+      0 0 10px 0 var(--color-background-darkest);
+  }
+}
