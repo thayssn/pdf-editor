@@ -75,3 +75,38 @@ button {
     background-color: var(--color-background);
   }
 }
+
+@media print {
+  body {
+    background-color: #ffffff !important;
+  }
+
+  body > :not(#printable-area) {
+    display: none !important;
+  }
+
+  body > #printable-area {
+    background-color: #ffffff !important;
+  }
+
+  h1 {
+    page-break-before: always;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    /* page-break-after: avoid; */
+  }
+
+  * {
+    page-break-inside: avoid;
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+}

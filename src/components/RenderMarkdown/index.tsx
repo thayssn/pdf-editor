@@ -25,15 +25,44 @@ export default function RenderMarkdown({
 
   const handlePrint = () => {
     const printWindow = window.open("", "_blank");
-    printWindow?.document.write(ref?.innerHTML ?? "");
-    printWindow?.document.close();
-    printWindow?.print();
+    if (!printWindow) return;
+
+    const styles = Array.from(document.styleSheets)
+      .map((sheet) => {
+        try {
+          return Array.from(sheet.cssRules)
+            .map((rule) => rule.cssText)
+            .join("\n");
+        } catch {
+          return "";
+        }
+      })
+      .join("\n");
+
+    const content = ref?.innerHTML || "";
+
+    printWindow.document.write(`
+      <html>
+        <head>
+          <style>${styles}</style>
+        </head>
+        <body>
+          <div id="printable-area" class="preview-pane">
+            ${content}
+          </div>
+        </body>
+      </html>
+    `);
+
+    printWindow.document.close();
+    printWindow.print();
+    printWindow.close();
   };
 
   return (
     <div class="preview-pane-wrapper">
       <button onClick={() => handlePrint()}>Print</button>
-      <div class="preview-pane" ref={ref} />
+      <div class="preview-pane" id="printable-area" ref={ref} />
     </div>
   );
 }

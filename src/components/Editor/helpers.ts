@@ -28,7 +28,7 @@ export const formatOptions: FormatButtonConfig[] = [
   { label: "H5", format: "h5", key: "5" },
   { label: "H6", format: "h6", key: "6" },
   { label: "Code", format: "code", key: "m" },
-  { label: "Bullet", format: "bullet", key: "p" },
+  { label: "Bullet", format: "bullet", key: "-" },
 ];
 
 export const applyFormat = (

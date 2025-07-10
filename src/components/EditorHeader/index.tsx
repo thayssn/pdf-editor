@@ -1,4 +1,4 @@
-import { Format, formatOptions } from "./helpers";
+import { Format, formatOptions } from "../Editor/helpers";
 import "./EditorHeader.scss";
 
 export default function EditorHeader({

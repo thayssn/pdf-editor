@@ -18,9 +18,8 @@
   h2,
   h3 {
     font-weight: 500;
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
     line-height: 1;
+    margin: 1.5em 0 0.5em 0;
   }
 
   h1 {
@@ -30,36 +29,32 @@
   }
 
   h2 {
-    margin: 0.2cm 0;
     font-size: 0.5cm;
+    font-weight: 500;
   }
 
   h3 {
-    margin: 0.2cm 0;
     font-size: 0.4cm;
+    font-weight: 500;
   }
 
   h4 {
-    font-size: 0.35cm;
+    font-size: 0.3cm;
     font-weight: 500;
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
+    margin: 0.2em 0;
     line-height: 1;
   }
 
   h5 {
     font-size: 0.25cm;
     font-weight: 500;
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
+    margin: 0.2em 0;
     line-height: 1;
   }
 
   h6 {
     font-size: 0.2cm;
     font-weight: 500;
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
     line-height: 1;
   }
 
@@ -87,6 +82,7 @@
     border: none;
     box-shadow: none;
     text-align: left;
+    font-size: 0.2cm;
     margin: 0.5cm 0;
 
     thead {
@@ -114,5 +110,13 @@
     padding: 0.2em;
     font-size: 0.2cm;
     line-height: 2;
+  }
+
+  li {
+    margin: 0.2cm 0;
+
+    &::marker {
+      margin-left: 0.2cm;
+    }
   }
 }

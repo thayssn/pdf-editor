@@ -1,8 +1,8 @@
-import { createEffect, createSignal, onMount } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 
 import { applyFormat, Format, formatOptions } from "./helpers";
-import EditorHeader from "./EditorHeader";
-import toast, { Toaster } from "solid-toast";
+import EditorHeader from "../EditorHeader";
+import toast from "solid-toast";
 
 import "./Editor.scss";
 import RenderMarkdown from "../RenderMarkdown";
@@ -11,7 +11,6 @@ export default function Editor() {
   const [content, setContent] = createSignal("");
 
   let textareaRef: HTMLTextAreaElement | undefined;
-  let renderMarkdownRef: HTMLDivElement | undefined;
 
   onMount(() => {
     const contentToLoad = localStorage.getItem("editor-content");
