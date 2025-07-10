@@ -10,16 +10,20 @@ export default function EditorHeader({
 }) {
   return (
     <div class="editor-header">
-      {formatOptions.map((option) => (
-        <button
-          onClick={() => {
-            onClickToFormat(option.format);
-          }}
-        >
-          {option.label}
-        </button>
-      ))}
-      <button onClick={onClickToSave}>Salvar</button>
+      <div class="format-buttons">
+        {formatOptions.map((option) => (
+          <button
+            onClick={() => {
+              onClickToFormat(option.format);
+            }}
+          >
+            {option.label}
+          </button>
+        ))}
+      </div>
+      <div class="action-buttons">
+        <button onClick={onClickToSave}>Salvar</button>
+      </div>
     </div>
   );
 }

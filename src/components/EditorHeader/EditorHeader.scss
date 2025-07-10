@@ -1,7 +1,13 @@
 .editor-header {
   display: flex;
   gap: 10px;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 10px;
+
+  @media screen and (max-width: 540px) {
+    & {
+      padding: 0.5em 0;
+    }
+  }
 }

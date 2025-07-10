@@ -1,6 +1,6 @@
 export const splitLines = (content: string) => content.split("\n");
 
-export const formatTags = (content: string): string => {
+export const formatToHTML = (content: string): string => {
   const tags = splitLines(content).map(renderHTMLLine).join("\n");
   return cleanTags(tags);
 };
@@ -12,12 +12,16 @@ const cleanTags = (content: string) => {
     code.forEach((c) => {
       finalContent = finalContent.replace(
         c,
-        c.replace(/<p>/gs, "").replace(/<\/p>/gs, "")
+        c.replace(/<p>/gs, "").replace(/<\/p>/gs, "").replace(/<br>/gs, "")
       );
     });
   }
 
-  return finalContent.replace(/<p><\/p>/gs, "");
+  return finalContent.replace(/<p><\/p>/gs, " ");
+};
+
+export const cleanMultiline = (content: string) => {
+  return content.replaceAll(/\n{2,}/gs, "\n");
 };
 
 export const renderCode = (content: string): string => {
@@ -28,7 +32,7 @@ export const renderCode = (content: string): string => {
     const [, language, code] = match.match(/```(.*?)\n(.*?)```/s) ?? [];
     newContent = newContent.replace(
       match,
-      `<h5>${language}</h5>
+      `<h6>${language}</h6>
       <pre><code>${code}</code></pre>`
     );
   });
@@ -55,23 +59,25 @@ export const renderCSV = (content: string): string => {
 };
 
 export const renderHTMLLine = (line: string): string => {
+  if (line.trim() === "\n") return "<br>";
+
   if (line.startsWith("# ")) {
-    return `<h1>${line.replace("# ", "")}</h1>`;
+    return `\n<h1>${line.replace("# ", "")}</h1>`;
   }
   if (line.startsWith("## ")) {
-    return `<h2>${line.replace("## ", "")}</h2>`;
+    return `\n<h2>${line.replace("## ", "")}</h2>`;
   }
   if (line.startsWith("### ")) {
-    return `<h3>${line.replace("### ", "")}</h3>`;
+    return `\n<h3>${line.replace("### ", "")}</h3>`;
   }
   if (line.startsWith("#### ")) {
-    return `<h4>${line.replace("#### ", "")}</h4>`;
+    return `\n<h4>${line.replace("#### ", "")}</h4>`;
   }
   if (line.startsWith("##### ")) {
-    return `<h5>${line.replace("##### ", "")}</h5>`;
+    return `\n<h5>${line.replace("##### ", "")}</h5>`;
   }
   if (line.startsWith("###### ")) {
-    return `<h6>${line.replace("###### ", "")}</h6>`;
+    return `\n<h6>${line.replace("###### ", "")}</h6>`;
   }
 
   let formattedLine = line;
@@ -94,5 +100,32 @@ export const renderHTMLLine = (line: string): string => {
     '<span class="italic">$1</span>'
   );
 
-  return `<p>${formattedLine}</p>`;
+  return `\n<p>${formattedLine}</p>`;
+};
+
+export const getPrintableContent = (content: string): string => {
+  const styles = Array.from(document.styleSheets)
+    .map((sheet) => {
+      try {
+        return Array.from(sheet.cssRules)
+          .map((rule) => rule.cssText)
+          .join("\n");
+      } catch {
+        return "";
+      }
+    })
+    .join("\n");
+
+  return `
+      <html>
+        <head>
+          <style>${styles}</style>
+        </head>
+        <body>
+          <div id="printable-area" class="print-page">
+            ${content}
+          </div>
+        </body>
+      </html>
+    `;
 };

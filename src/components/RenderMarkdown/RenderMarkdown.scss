@@ -1,11 +1,57 @@
-.preview-pane-wrapper {
+.print-page-wrapper {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+
+  .scroll-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
 }
 
-.preview-pane {
+.print-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1rem;
+
+  @media screen and (max-width: 540px) {
+    & {
+      padding: 0.5em 0;
+    }
+  }
+}
+
+.print-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-background);
+  padding: 2rem 1rem;
+
+  @media screen and (max-width: 1600px) {
+    & {
+      zoom: 0.6;
+    }
+  }
+
+  @media screen and (max-width: 1080px) {
+    & {
+      width: 100%;
+      transform-origin: top center;
+      margin: 0 auto;
+    }
+  }
+
+  @media screen and (max-width: 540px) {
+    & {
+      zoom: 0.3;
+    }
+  }
+}
+
+.print-page {
   text-align: left;
   background-color: var(--color-background-lightest);
   overflow-y: auto;
@@ -13,6 +59,16 @@
   padding: 1.5cm 2cm;
   line-height: 1.2;
   font-size: 0.3cm;
+  width: 21cm;
+  background: linear-gradient(
+    to bottom,
+    var(--color-background-lightest) 29.68cm,
+    red 29.68cm,
+    red 29.7cm,
+    var(--color-background-lightest) 29.7cm
+  );
+  background-size: 100% 29.7cm;
+  background-repeat: repeat-y;
 
   h1,
   h2,
@@ -81,7 +137,7 @@
     border: none;
     box-shadow: none;
     text-align: left;
-    font-size: 0.2cm;
+    font-size: 0.24cm;
     margin: 0.5cm 0;
 
     thead {
@@ -107,15 +163,11 @@
   code {
     background-color: var(--color-background-lightest);
     padding: 0.2em;
-    font-size: 0.2cm;
-    line-height: 2;
+    font-size: 0.25cm;
+    line-height: 1;
   }
 
   li {
     margin: 0.2cm 0;
-
-    &::marker {
-      margin-left: 0.2cm;
-    }
   }
 }

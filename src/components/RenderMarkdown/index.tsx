@@ -1,6 +1,20 @@
-import { Accessor, createEffect, createMemo } from "solid-js";
+import {
+  Accessor,
+  createEffect,
+  createMemo,
+  createSignal,
+  onMount,
+  Show,
+} from "solid-js";
+import {
+  cleanMultiline,
+  formatToHTML,
+  getPrintableContent,
+  renderCode,
+  renderCSV,
+} from "./helpers";
+import { toast } from "solid-toast";
 import "./RenderMarkdown.scss";
-import { formatTags, renderCode, renderCSV } from "./helpers";
 
 export default function RenderMarkdown({
   content,
@@ -8,9 +22,9 @@ export default function RenderMarkdown({
   content: Accessor<string>;
 }) {
   const newContent = createMemo(() => {
-    const renderedCSV = renderCSV(content());
+    const renderedCSV = renderCSV(cleanMultiline(content()));
     const renderedCode = renderCode(renderedCSV);
-    return formatTags(renderedCode);
+    return formatToHTML(renderedCode);
   });
 
   let ref: HTMLDivElement | undefined;
@@ -27,42 +41,48 @@ export default function RenderMarkdown({
     const printWindow = window.open("", "_blank");
     if (!printWindow) return;
 
-    const styles = Array.from(document.styleSheets)
-      .map((sheet) => {
-        try {
-          return Array.from(sheet.cssRules)
-            .map((rule) => rule.cssText)
-            .join("\n");
-        } catch {
-          return "";
-        }
-      })
-      .join("\n");
-
-    const content = ref?.innerHTML || "";
-
-    printWindow.document.write(`
-      <html>
-        <head>
-          <style>${styles}</style>
-        </head>
-        <body>
-          <div id="printable-area" class="preview-pane">
-            ${content}
-          </div>
-        </body>
-      </html>
-    `);
-
+    printWindow.document.write(getPrintableContent(newContent()));
+    printWindow.document.body.style.backgroundColor = "white";
     printWindow.document.close();
     printWindow.print();
     printWindow.close();
   };
 
+  const handleDownloadPDF = () => {
+    toast.error("Not implemented yet");
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const [hitBottom, setHitBottom] = createSignal(false);
+
+  onMount(() => {
+    window.addEventListener("scroll", () => {
+      console.log(window.scrollY);
+      if (window.scrollY > window.innerHeight) {
+        setHitBottom(true);
+      } else {
+        setHitBottom(false);
+      }
+    });
+  });
+
   return (
-    <div class="preview-pane-wrapper">
-      <button onClick={() => handlePrint()}>Print</button>
-      <div class="preview-pane" id="printable-area" ref={ref} />
+    <div class="print-page-wrapper">
+      <div class="print-page-header">
+        <button onClick={() => handlePrint()}>Print</button>
+        <button onClick={() => handleDownloadPDF()}>Download </button>
+      </div>
+      <div class="print-page-container">
+        <div class="print-page" id="printable-area" ref={ref} />
+      </div>
+      <Show when={hitBottom()}>
+        <button onClick={() => scrollToTop()} class="scroll-to-top">
+          Back to editing
+        </button>
+      </Show>
     </div>
   );
 }

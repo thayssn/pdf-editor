@@ -15,6 +15,12 @@
     -2px -2px 5px 0 var(--color-background-lightest),
     0 0 10px 0 var(--color-background-darkest);
   --header-height: 5rem;
+
+  @media screen and (max-width: 540px) {
+    & {
+      --header-height: 3rem;
+    }
+  }
 }
 
 body {
@@ -36,7 +42,6 @@ header {
     font-weight: 100;
     font-size: 2.4rem;
     line-height: 1.1;
-    height: 100%;
     margin: 0 auto;
   }
 }
@@ -66,7 +71,7 @@ p {
 button {
   background-color: var(--color-background-lightest);
   border: none;
-  padding: 5px 10px;
+  padding: 0.5rem 1rem;
   cursor: pointer;
   box-shadow: var(--box-shadow-inset);
   display: inline-block;
@@ -74,7 +79,16 @@ button {
   &:hover {
     background-color: var(--color-background);
   }
+
+  @media screen and (max-width: 540px) {
+  & {
+    font-size: 2vw;
+    padding: 0.2em;
+    margin: 0.6em;
+    border-radius: 0.2em;
+  }
 }
+
 
 @media print {
   body {
