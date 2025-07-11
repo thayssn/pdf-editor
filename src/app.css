@@ -8,24 +8,20 @@
   --color-background-dark: #f2f2f2;
   --color-background-light: #fafafa;
   --color-background-lightest: #ffffff;
-  --shadow-inset: inset 2px 2px 5px 0 var(--color-background-darkest),
+  --box-shadow-inset: inset 2px 2px 5px 0 var(--color-background-darkest),
     inset -2px -2px 5px 0 var(--color-background-lightest),
     0 0 10px 0 var(--color-background-darkest);
-  --shadow-offset: 2px 2px 5px 0 var(--color-background-darkest),
+  --box-shadow-offset: 2px 2px 5px 0 var(--color-background-darkest),
     -2px -2px 5px 0 var(--color-background-lightest),
     0 0 10px 0 var(--color-background-darkest);
   --header-height: 5rem;
-
-  @media screen and (max-width: 540px) {
-    & {
-      --header-height: 3rem;
-    }
-  }
 }
 
 body {
   font-family: Gordita, Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
     "Helvetica Neue", sans-serif;
+  padding: 0;
+  margin: 0;
   background-color: var(--color-background-light);
 }
 
@@ -34,28 +30,21 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
-  .logo {
-    color: var(--color-light);
-    text-shadow: 1px 1px 5px var(--color-background-darkest);
-    text-transform: uppercase;
-    font-weight: 100;
-    font-size: 2.4rem;
-    line-height: 1.1;
-    margin: 0 auto;
-  }
+.logo {
+  color: var(--color-light);
+  text-shadow: 1px 1px 5px var(--color-background-darkest);
+  text-transform: uppercase;
+  font-weight: 100;
+  font-size: 2.4rem;
+  line-height: 1.1;
+  margin: 0 auto;
 }
 
 main {
   text-align: center;
-  padding: 1em;
   margin: 0 auto;
-}
-
-p {
-  max-width: 14rem;
-  margin: 2rem auto;
-  line-height: 1.35;
 }
 
 @media (min-width: 480px) {
@@ -75,13 +64,18 @@ button {
   cursor: pointer;
   box-shadow: var(--box-shadow-inset);
   display: inline-block;
+}
 
-  &:hover {
-    background-color: var(--color-background);
+&:hover {
+  background-color: var(--color-background-light);
+}
+
+@media screen and (max-width: 540px) {
+  :root {
+    --header-height: 3rem;
   }
 
-  @media screen and (max-width: 540px) {
-  & {
+  button {
     font-size: 2vw;
     padding: 0.2em;
     margin: 0.6em;
@@ -89,37 +83,20 @@ button {
   }
 }
 
-
 @media print {
   body {
     background-color: #ffffff !important;
   }
 
-  body > :not(#printable-area) {
+  header {
     display: none !important;
   }
 
-  body > #printable-area {
-    background-color: #ffffff !important;
-  }
-
-  h1 {
-    break-before: always;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    break-after: avoid;
-  }
-
   * {
-    break-inside: avoid;
-    -webkit-print-color-adjust: exact !important;
-    color-adjust: exact !important;
+    page-break-inside: avoid;
+    -webkit-print-color-adjust: economy !important;
+    color-adjust: economy !important;
+    size-adjust: 100% !important;
     text-shadow: none !important;
     box-shadow: none !important;
   }

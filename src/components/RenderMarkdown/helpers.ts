@@ -59,7 +59,7 @@ export const renderCSV = (content: string): string => {
 };
 
 export const renderHTMLLine = (line: string): string => {
-  if (line.trim() === "\n") return "<br>";
+  if (line === "\n") return "<br>";
 
   if (line.startsWith("# ")) {
     return `\n<h1>${line.replace("# ", "")}</h1>`;

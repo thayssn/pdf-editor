@@ -1,19 +1,32 @@
 .print-page-wrapper {
   flex: 1;
+  position: relative;
 
   .scroll-to-top {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 1rem;
+    right: 1rem;
     z-index: 1000;
+    box-shadow: var(--box-shadow);
   }
 }
 
 .print-page-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding: 1rem;
+
+  @media print {
+    & {
+      display: none !important;
+    }
+  }
 
   @media screen and (max-width: 540px) {
     & {
@@ -30,6 +43,14 @@
   background-color: var(--color-background);
   padding: 2rem 1rem;
 
+  @media print {
+    & {
+      background-color: #ffffff !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+  }
+
   @media screen and (max-width: 1600px) {
     & {
       zoom: 0.6;
@@ -39,6 +60,7 @@
   @media screen and (max-width: 1080px) {
     & {
       width: 100%;
+      padding: 0;
       transform-origin: top center;
       margin: 0 auto;
     }
@@ -56,35 +78,40 @@
   background-color: var(--color-background-lightest);
   overflow-y: auto;
   box-shadow: var(--box-shadow-inset);
-  padding: 1.5cm 2cm;
+  padding: 1cm 1.5cm;
   line-height: 1.2;
   font-size: 0.3cm;
   width: 21cm;
-  background: linear-gradient(
-    to bottom,
-    var(--color-background-lightest) 29.68cm,
-    red 29.68cm,
-    red 29.7cm,
-    var(--color-background-lightest) 29.7cm
-  );
-  background-size: 100% 29.7cm;
-  background-repeat: repeat-y;
 
   h1,
   h2,
   h3 {
-    font-weight: 500;
-    line-height: 1;
-    margin: 1.5em 0 0.5em 0;
+    @media print {
+      & {
+        page-break-before: auto;
+      }
+    }
   }
 
   h1 {
-    margin: 1em 0;
+    margin-top: 2em;
+    margin-bottom: 0.75em;
     font-size: 0.8cm;
     border-bottom: 1px solid var(--color-background-dark);
+
+    @media print {
+      & {
+        page-break-before: always;
+        background-color: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+    }
   }
 
   h2 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
     font-size: 0.7cm;
     font-weight: 500;
   }
@@ -128,8 +155,8 @@
   }
 
   p {
-    line-height: 1.5;
-    margin: 1.4em 0;
+    line-height: 1.4;
+    margin: 0.8em 0;
   }
 
   table {
@@ -161,7 +188,6 @@
   }
 
   code {
-    background-color: var(--color-background-lightest);
     padding: 0.2em;
     font-size: 0.25cm;
     line-height: 1;

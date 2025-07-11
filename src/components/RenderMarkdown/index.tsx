@@ -60,7 +60,6 @@ export default function RenderMarkdown({
 
   onMount(() => {
     window.addEventListener("scroll", () => {
-      console.log(window.scrollY);
       if (window.scrollY > window.innerHeight) {
         setHitBottom(true);
       } else {
@@ -75,12 +74,12 @@ export default function RenderMarkdown({
         <button onClick={() => handlePrint()}>Print</button>
         <button onClick={() => handleDownloadPDF()}>Download </button>
       </div>
-      <div class="print-page-container">
-        <div class="print-page" id="printable-area" ref={ref} />
+      <div class="print-page-container" id="printable-area">
+        <div class="print-page" ref={ref} />
       </div>
       <Show when={hitBottom()}>
         <button onClick={() => scrollToTop()} class="scroll-to-top">
-          Back to editing
+          🔝
         </button>
       </Show>
     </div>
