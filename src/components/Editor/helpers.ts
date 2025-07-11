@@ -9,7 +9,8 @@ export type Format =
   | "h5"
   | "h6"
   | "code"
-  | "bullet";
+  | "bullet"
+  | "line";
 
 export type FormatButtonConfig = {
   label: string;
@@ -27,8 +28,9 @@ export const formatOptions: FormatButtonConfig[] = [
   { label: "H4", format: "h4", key: "4" },
   { label: "H5", format: "h5", key: "5" },
   { label: "H6", format: "h6", key: "6" },
-  { label: "Code", format: "code", key: "m" },
-  { label: "Bullet", format: "bullet", key: "-" },
+  { label: "</>", format: "code", key: "m" },
+  { label: "•", format: "bullet", key: "-" },
+  { label: "⏎", format: "line", key: "enter" },
 ];
 
 export const applyFormat = (
@@ -40,7 +42,6 @@ export const applyFormat = (
 
   const start = textareaRef.selectionStart;
   const end = textareaRef.selectionEnd;
-  if (start === end) return content;
 
   const selectedText = content.substring(start, end);
 
@@ -78,6 +79,9 @@ export const applyFormat = (
       break;
     case "bullet":
       markdown = `- ${selectedText};`;
+      break;
+    case "line":
+      markdown = `--\n${selectedText}`;
       break;
     default:
       markdown = selectedText;
