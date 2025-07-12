@@ -31,7 +31,7 @@
     }
   }
 
-  @media screen and (max-width: 960px) {
+  @media screen and (max-width: 640px) {
     & {
       flex-direction: row-reverse;
       position: initial;
@@ -46,7 +46,6 @@
     width: 100%;
     padding: 10px;
     outline: none;
-    resize: vertical;
     font-family: "Gordita", monospace;
     font-size: 0.7rem;
     border: none;
@@ -61,6 +60,7 @@
       & {
         flex-grow: 1;
         flex-shrink: 0;
+        width: unset;
       }
     }
   }

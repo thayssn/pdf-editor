@@ -38,14 +38,14 @@ export default function RenderMarkdown({
   });
 
   const handlePrint = () => {
-    const printWindow = window.open("", "_blank");
-    if (!printWindow) return;
+    // const printWindow = window.open("", "_blank");
+    // if (!printWindow) return;
 
-    printWindow.document.write(getPrintableContent(newContent()));
-    printWindow.document.body.style.backgroundColor = "white";
-    printWindow.document.close();
-    printWindow.print();
-    printWindow.close();
+    // printWindow.document.write(getPrintableContent(newContent()));
+    // printWindow.document.body.style.backgroundColor = "white";
+    // printWindow.document.close();
+    window.print();
+    // printWindow.close();
   };
 
   const handleDownloadPDF = () => {
@@ -79,7 +79,7 @@ export default function RenderMarkdown({
       </div>
       <Show when={hitBottom()}>
         <button onClick={() => scrollToTop()} class="scroll-to-top">
-          🔝
+          TOP
         </button>
       </Show>
     </div>
