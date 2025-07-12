@@ -1,20 +1,19 @@
 :root {
-  --color: #3e98ff;
-  --color-light: #68d1e9;
-  --color-lightest: #98d1e9;
-  --color-dark: #2887a8;
-  --color-darkest: #186788;
+  --color: #a8dadc;
+  --color-dark: #457b9d;
+  --color-darkest: #1d3557;
+  --color-light: #f1faee;
+  --color-lightest: #ffffff;
   --color-background: #f2f2f2;
-  --color-background-dark: #f2f2f2;
+  --color-background-dark: #d4d4d4;
+  --color-background-darkest: #cccccc;
   --color-background-light: #fafafa;
   --color-background-lightest: #ffffff;
-  --box-shadow-inset: inset 2px 2px 5px 0 var(--color-background-darkest),
-    inset -2px -2px 5px 0 var(--color-background-lightest),
-    0 0 10px 0 var(--color-background-darkest);
-  --box-shadow-offset: 2px 2px 5px 0 var(--color-background-darkest),
-    -2px -2px 5px 0 var(--color-background-lightest),
-    0 0 10px 0 var(--color-background-darkest);
-  --header-height: 5rem;
+  --box-shadow-inset: inset -4px -4px 10px 0 var(--color),
+    inset 2px 2px 10px 0 var(--color-lightest);
+  --box-shadow-inset-reverse: inset 2px 2px 5px 0 var(--color),
+    inset -2px -2px 5px 0 var(--color-lightest);
+  --header-height: calc(clamp(3rem, 15vh, 15rem) + 0.5rem);
 }
 
 body {
@@ -33,11 +32,11 @@ header {
 }
 
 .logo {
-  color: var(--color-light);
+  color: var(--color);
   text-shadow: 1px 1px 5px var(--color-background-darkest);
   text-transform: uppercase;
   font-weight: 100;
-  font-size: 2.4rem;
+  font-size: 3.4rem;
   line-height: 1.1;
   margin: 0 auto;
 }
@@ -45,41 +44,36 @@ header {
 main {
   text-align: center;
   margin: 0 auto;
+  padding: 0.5em;
 }
 
-@media (min-width: 480px) {
-  h1 {
-    max-width: none;
-  }
+h1 {
+  max-width: unset;
+}
 
-  p {
-    max-width: none;
-  }
+p {
+  max-width: unset;
 }
 
 button {
-  background-color: var(--color-background-lightest);
   border: none;
   padding: 0.5rem 1rem;
   cursor: pointer;
   box-shadow: var(--box-shadow-inset);
   display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  border: 1px solid var(--color);
+  transition: 0.2s box-shadow;
 }
 
-&:hover {
-  background-color: var(--color-background-light);
+button:hover {
+  box-shadow: var(--box-shadow-inset-reverse);
 }
 
 @media screen and (max-width: 540px) {
   :root {
     --header-height: 3rem;
-  }
-
-  button {
-    font-size: 2vw;
-    padding: 0.2em;
-    margin: 0.6em;
-    border-radius: 0.2em;
   }
 }
 

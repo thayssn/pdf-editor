@@ -22,7 +22,7 @@ export default function EditorHeader({
         ))}
       </div>
       <div class="action-buttons">
-        <button onClick={onClickToSave}>Salvar</button>
+        <button onClick={onClickToSave}>Save</button>
       </div>
     </div>
   );

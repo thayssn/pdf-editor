@@ -33,7 +33,6 @@ export default function Editor() {
       } else if (e.key === "s") {
         e.preventDefault();
         handleSaveContent();
-        toast.success("Content saved locally!");
       }
     }
   };
@@ -41,6 +40,7 @@ export default function Editor() {
   const handleSaveContent = () => {
     const contentToSave = content();
     localStorage.setItem("editor-content", contentToSave);
+    toast.success("Content saved locally!");
   };
 
   return (
