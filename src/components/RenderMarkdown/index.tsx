@@ -38,14 +38,7 @@ export default function RenderMarkdown({
   });
 
   const handlePrint = () => {
-    // const printWindow = window.open("", "_blank");
-    // if (!printWindow) return;
-
-    // printWindow.document.write(getPrintableContent(newContent()));
-    // printWindow.document.body.style.backgroundColor = "white";
-    // printWindow.document.close();
     window.print();
-    // printWindow.close();
   };
 
   const handleDownloadPDF = () => {
